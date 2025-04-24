@@ -12,6 +12,8 @@ sudo apt update && sudo apt install -y make
 
 # Projeyi klonlayın:
 git clone https://github.com/AkifCanSonmez/CENG316-Project
+
+#Klonladığınız projenin dizinine gidin
 cd CENG316-Project
 
 # 🔀 Kendi branch'inizi oluşturun: (Şimdilik Opsiyonel ancak geliştirme aşamasında kritik bir durum şimdiden git öğrenin eğer bilmiyorsanız).
