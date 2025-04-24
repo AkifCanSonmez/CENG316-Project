@@ -23,6 +23,8 @@ make setup-system
 # 2️⃣ Proje bağımlılıklarını yükle
 make setup-project
 
+```
+
 ```bash
 cd frontend
 npm start
