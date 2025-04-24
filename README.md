@@ -9,11 +9,14 @@ sudo apt update && sudo apt install -y make
 
 ```bash
 # Eğer sisteminizde make yüklü değilse:
-sudo apt update
-sudo apt install make
+sudo apt update && sudo apt install -y make
 
+# Projeyi klonlayın:
 git clone https://github.com/AkifCanSonmez/CENG316-Project
 cd CENG316-Project
+
+# VSCode ile açmak için (isteğe bağlı)
+code .
 
 # 1️⃣ Sistem bağımlılıklarını kur (sadece 1 kez çalıştırılır)
 make setup-system
@@ -21,9 +24,14 @@ make setup-system
 # 2️⃣ Proje bağımlılıklarını yükle
 make setup-project
 
-# 3️⃣ Geliştirmeye başla (frontend + backend aynı anda açılır)
-make run
+```bash
+cd frontend
+npm start
 ```
+
+npm start dedikten sonra "localhost:3000" portuna yönlendirileceksiniz. Bu adres sonuna /isminiz yazarak sizinle ilgili page'in
+ilk halini görebilirsiniz. Bu page'i geliştirmek için "app/frontend/src/pages/" altındaki sizin isiminizle açılan dosyalar 
+üzerinden geliştirmelerinizi yapabilirsiniz.
 
 ---
 
