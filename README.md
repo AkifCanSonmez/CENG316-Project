@@ -5,7 +5,6 @@ Bu proje, React (frontend) ve Python FastAPI (backend) kullanılarak geliştiril
 ---
 
 ## 🚀 Hızlı Başlangıç (Kısayol Komutlar)
-sudo apt update && sudo apt install -y make
 
 ```bash
 # Eğer sisteminizde make yüklü değilse:
