@@ -1,53 +1,20 @@
+/* src/components/Layout.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+body, #root {
+  margin: 0;
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+}
+
 .layout-container {
   display: flex;
-  flex-direction: column;
   height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.layout-header {
-  background-color: #003366;
-  color: white;
-  padding: 1rem 2rem;
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-
-.layout-body {
-  display: flex;
-  flex: 1;
-}
-
-.layout-sidebar {
-  width: 250px;
-  background-color: #f4f6f8;
-  border-right: 1px solid #ddd;
-  padding: 1.5rem;
-}
-
-.layout-sidebar ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.layout-sidebar li {
-  margin-bottom: 1rem;
-}
-
-.layout-sidebar a {
-  text-decoration: none;
-  color: #333;
-  font-weight: 500;
-  transition: color 0.2s ease;
-}
-
-.layout-sidebar a:hover {
-  color: #003366;
 }
 
 .layout-content {
   flex: 1;
-  padding: 2rem;
-  background-color: #fff;
+  padding: 1.5rem;
+  background-color: #fff5f5; /* very light red tint */
+  overflow-y: auto;
 }

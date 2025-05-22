@@ -1,0 +1,78 @@
+/* src/components/NavBar.css */
+
+/* Sidebar container */
+.sidebar {
+    width: 240px;
+    background-color: #b91c1c; /* dark red */
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+  }
+  
+  /* Logo + title */
+  .sidebar-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .sidebar-logo {
+    width: 40px;
+    height: 40px;
+    margin-right: 0.75rem;
+  }
+  
+  .sidebar-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  
+  /* Navigation links */
+  .sidebar-nav {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .sidebar-link {
+    color: #ffe4e6; /* light pink */
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background 0.2s;
+  }
+  
+  .sidebar-link:hover {
+    background-color: #991b1b; /* slightly darker */
+  }
+  
+  /* Footer (logout) */
+  .sidebar-footer {
+    border-top: 1px solid #7f1d1d;
+    padding-top: 1rem;
+  }
+  
+  .sidebar-user {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+  
+  .sidebar-logout {
+    background-color: #ef4444; /* bright red */
+    color: #fff;
+    border: none;
+    padding: 0.5rem;
+    width: 100%;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .sidebar-logout:hover {
+    background-color: #dc2626;
+  }
+  

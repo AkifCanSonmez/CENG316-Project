@@ -1,0 +1,96 @@
+/* src/components/Login.css */
+
+.login-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background is set inline in Login.js */
+  }
+  
+  /* dark overlay */
+  .login-container .login-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 0;
+  }
+  
+  /* Form box */
+  .login-form {
+    position: relative;
+    z-index: 1;
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 340px;
+    text-align: center;
+  }
+  
+  .login-logo {
+    width: 60px;
+    margin-bottom: 1rem;
+  }
+  
+  .login-form h2 {
+    margin-bottom: 1.5rem;
+    color: #991b1c;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+  
+  .login-form input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    background-color: #f9fafb;
+    transition: border-color 0.2s, background-color 0.2s;
+  }
+  
+  .login-form input:focus {
+    border-color: #991b1c;
+    background-color: #ffffff;
+    outline: none;
+  }
+  
+  .login-form button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #4b5563;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+  }
+  
+  .login-form button:hover {
+    background-color: #374151;
+  }
+  
+  .login-error {
+    color: #b91c1c;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+  }
+  /* at end of Login.css */
+.login-switch {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #374151;
+  text-align: center;
+}
+.login-switch a {
+  color: #991b1c;
+  text-decoration: none;
+}
+.login-switch a:hover {
+  text-decoration: underline;
+}
