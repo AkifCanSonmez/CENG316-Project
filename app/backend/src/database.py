@@ -1,17 +1,17 @@
+# app/backend/src/database.py
+
 import os
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from dotenv import load_dotenv
 
-# Load .env from one level up
-dotenv_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env')
-load_dotenv(dotenv_path)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # = src/
+DB_PATH = os.path.join(BASE_DIR, "app.db")
+SQLALCHEMY_DATABASE_URL = f"sqlite:///{DB_PATH}"
 
-DATABASE_URL = os.getenv("MYSQL_URL")
-if not DATABASE_URL:
-    raise RuntimeError("MYSQL_URL not set in .env")
+engine = create_engine(
+    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
+)
 
-engine = create_engine(DATABASE_URL, pool_pre_ping=True)
-SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()

@@ -1,30 +1,37 @@
 // src/components/Register.js
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
-import './Register.css'
+
+import React, { useState } from 'react';
+import { Link, useNavigate, Navigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import './Register.css';
 
 export default function Register() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [role, setRole] = useState('student')
-  const [error, setError] = useState(null)
-  const { register } = useAuth()
-  const navigate = useNavigate()
+  // 1) Hooks at the very top, unconditionally
+  const { user, register } = useAuth();
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [role, setRole] = useState('student');
+  const [error, setError] = useState(null);
 
-  const handleSubmit = async e => {
-    e.preventDefault()
-    setError(null)
-    try {
-      // Perform registration, but do NOT set the user in context
-      await register(email, password, role)
-      // After success, send them to login
-      navigate('/login')
-    } catch (err) {
-      setError(err.message)
-    }
+  // 2) Conditional redirect after hooks
+  if (user) {
+    return <Navigate to="/app" replace />;
   }
 
+  // 3) Form submit handler
+  const handleSubmit = async e => {
+    e.preventDefault();
+    setError(null);
+    try {
+      await register(email, password, role);
+      navigate('/login', { replace: true });
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  // 4) JSX
   return (
     <div className="register-container">
       <form className="register-form" onSubmit={handleSubmit}>
@@ -61,10 +68,10 @@ export default function Register() {
 
         <button type="submit">Kayıt Ol</button>
 
-        <p>
+        <p className="register-switch">
           Zaten hesabın var mı? <Link to="/login">Giriş Yap</Link>
         </p>
       </form>
     </div>
-  )
+  );
 }
