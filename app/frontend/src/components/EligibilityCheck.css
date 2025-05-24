@@ -1,0 +1,18 @@
+.eligibility-container {
+  padding: 1.5rem;
+  background: #f8f8f8;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+.eligibility-header {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+.eligibility-pass {
+  color: green;
+  font-weight: bold;
+}
+.eligibility-fail {
+  color: red;
+  font-weight: bold;
+}

@@ -1,0 +1,60 @@
+/* RequestExamDecided.css */
+.decided-container {
+    background: #fff5f5;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    max-width: 700px;
+    margin: auto;
+  }
+  
+  .decided-container h2 {
+    color: #991b1c;
+    margin-bottom: 1rem;
+  }
+  
+  .decided-container p {
+    color: #7f1d1d;
+  }
+  
+  .decided-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .decided-container li {
+    padding: 1rem;
+    border: 1px solid #fecaca;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Approved = green */
+  .decided-container li .approved {
+    color: #065f46;
+    font-weight: 600;
+  }
+  
+  /* Rejected = red */
+  .decided-container li .rejected {
+    color: #b91c1c;
+    font-weight: 600;
+  }
+  
+  /* If there is a button here, keep it neutral */
+  .decided-container button {
+    background-color: #4a4a4a;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .decided-container button:hover {
+    background-color: #333333;
+  }
+  

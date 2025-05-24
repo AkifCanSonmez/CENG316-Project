@@ -1,0 +1,76 @@
+/* DecideExamRequest.css */
+.dec-container {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    max-width: 500px;
+    margin: auto;
+  }
+  
+  .dec-container h2 {
+    color: #991b1c;
+    margin-bottom: 1rem;
+  }
+  
+  .dec-container p {
+    margin: 0.5rem 0;
+    color: #374151;
+  }
+  
+  .dec-container form {
+    margin-top: 1rem;
+  }
+  
+  .dec-container select {
+    width: 100%;
+    padding: 0.6rem;
+    margin-bottom: 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    background-color: #f9fafb;
+    transition: border-color 0.2s;
+  }
+  
+  .dec-container select:focus {
+    border-color: #991b1c;
+    background-color: #ffffff;
+    outline: none;
+  }
+  
+  .primary-button {
+    background-color: #4b5563; /* neutral */
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+  
+  .primary-button:hover {
+    background-color: #374151;
+  }
+  
+  .secondary-button {
+    background: none;
+    border: none;
+    color: #4b5563;
+    margin-top: 1rem;
+    cursor: pointer;
+  }
+  
+  .dec-feedback {
+    margin-top: 1rem;
+    font-weight: 500;
+  }
+  
+  .dec-feedback.success {
+    color: #065f46;
+  }
+  
+  .dec-feedback.error {
+    color: #b91c1c;
+  }
+  

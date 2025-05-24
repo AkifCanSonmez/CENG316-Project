@@ -1,0 +1,75 @@
+.grad-apply {
+  padding: 2rem;
+  background-color: #fefefe;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.grad-apply h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #222;
+}
+
+.grad-apply .alert {
+  background-color: #e7f3ff;
+  color: #084298;
+  padding: 0.75rem 1rem;
+  border-left: 5px solid #2196f3;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.grad-apply .error {
+  color: #d32f2f;
+  background-color: #fdecea;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.grad-apply button {
+  background-color: #1976d2;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.grad-apply button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.grad-apply button:hover:not(:disabled) {
+  background-color: #1565c0;
+  transform: translateY(-1px);
+}
+
+.grad-apply h3 {
+  margin-top: 2rem;
+  font-size: 1.25rem;
+  color: #444;
+}
+
+.grad-apply ul {
+  list-style: none;
+  padding: 0;
+}
+
+.grad-apply li {
+  background: #ffffff;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  font-size: 0.95rem;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+}

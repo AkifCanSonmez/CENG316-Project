@@ -1,3 +1,4 @@
+///root/ceng/CENG316-Project/app/frontend/src/index.js
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';

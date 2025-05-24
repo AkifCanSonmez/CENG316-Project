@@ -1,0 +1,134 @@
+/* RequestExam.css */
+.req-container {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    max-width: 700px;
+    margin: auto;
+  }
+  
+  .req-container h2 {
+    color: #991b1c;
+    margin-bottom: 1rem;
+  }
+  
+  .req-status {
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+  
+  .req-status.success {
+    color: #065f46; /* green */
+  }
+  
+  .req-status.error {
+    color: #b91c1c; /* red */
+  }
+  
+  .req-container form {
+    margin-bottom: 2rem;
+  }
+  
+  .req-container label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+  
+  .req-container select,
+  .req-container textarea {
+    width: 100%;
+    padding: 0.6rem;
+    margin-bottom: 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    background-color: #f9fafb;
+    transition: border-color 0.2s;
+  }
+  
+  .req-container select:focus,
+  .req-container textarea:focus {
+    border-color: #991b1c;
+    background-color: #ffffff;
+    outline: none;
+  }
+  
+  .primary-button {
+    background-color: #4b5563; /* neutral slate */
+    color: #ffffff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+  
+  .primary-button:hover:not(:disabled) {
+    background-color: #374151;
+  }
+  
+  .danger-button {
+    background-color: #b91c1c;
+    color: #ffffff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+  
+  .danger-button:hover:not(:disabled) {
+    background-color: #991b1b;
+  }
+  
+  .primary-button:disabled,
+  .danger-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .req-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .req-list li {
+    padding: 1rem;
+    border: 1px solid #f1f1f1;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  
+  .req-list li.selected {
+    background-color: #fee2e2;
+    border-color: #f87171;
+  }
+  
+  .req-list li:hover {
+    background-color: #f9e9e9;
+  }
+  
+  .req-list li input {
+    cursor: pointer;
+  }
+  
+  .req-list li p {
+    margin: 0.25rem 0 0;
+    color: #374151;
+  }
+  
+  .decision-panel {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
