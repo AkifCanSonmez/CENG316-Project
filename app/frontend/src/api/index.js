@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const client = axios.create({
-  baseURL: 'https://your-backend.api',  // ← adjust
+  baseURL: 'https://ceng316-project-production.up.railway.app/',  // ← adjust
 })
 
 // auth

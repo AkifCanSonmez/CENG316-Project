@@ -22,8 +22,8 @@ export default function RequestExamDecided() {
           {decided.map(r => (
             <li key={r.id}>
               <strong>{r.studentName}</strong> — {r.course} — {r.date} —{' '}
-              <span className={r.decision === 'approved' ? 'approved' : 'rejected'}>
-                {r.decision === 'approved' ? 'Onaylandı' : 'Reddedildi'}
+              <span className={r.decision === 'Onaylandı' ? 'Onaylandı' : 'Reddedildi'}>
+                {r.decision === 'Onaylandı' ? 'Onaylandı' : 'Reddedildi'}
               </span>
             </li>
           ))}

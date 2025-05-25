@@ -98,7 +98,7 @@ def login(data: AuthRequest, db: Session = Depends(get_db)):
 # -------------------- GRADUATION HELPERS --------------------
 
 def calculate_graduation_list(db: Session):
-    apps = db.query(GraduationApplication).filter_by(status="approved", is_closed=True).all()
+    apps = db.query(GraduationApplication).filter_by(status="Onaylandı", is_closed=True).all()
     result = []
     for app in apps:
         grades = [e.grade for e in app.student.transcripts]
@@ -130,13 +130,13 @@ def bulk_applications(db: Session = Depends(get_db)):
     students = db.query(User).filter_by(role="student").all()
     created = []
     for s in students:
-        exists = db.query(GraduationApplication).filter_by(student_id=s.id, is_closed=False).first()
+        exists = db.query(GraduationApplication).filter_by(student_id=s.id).first()
         if not exists:
             app = GraduationApplication(
                 student_id=s.id,
                 initiated_by="admin",
                 created_at=datetime.utcnow(),  # oluşturulma zamanı
-                status="pending"               # advisor onayı bekliyor
+                status="Devam Ediyor"               # advisor onayı bekliyor
             )
             db.add(app)
             created.append(s.email)
