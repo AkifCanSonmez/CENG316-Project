@@ -17,7 +17,7 @@ class GraduationApplication(Base):
     id           = Column(Integer, primary_key=True, index=True)
     student_id   = Column(Integer, ForeignKey("users.id"), nullable=False)
     initiated_by = Column(String(20), nullable=False)
-    status       = Column(String(20), default="pending")
+    status       = Column(String(20), default="Devam Ediyor")
     is_closed    = Column(Boolean, default=False)
     created_at   = Column(DateTime, default=lambda: datetime.now(timezone.utc))
     updated_at   = Column(DateTime, default=lambda: datetime.now(timezone.utc))

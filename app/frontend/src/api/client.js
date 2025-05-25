@@ -4,7 +4,7 @@ import axios from 'axios';
 // Backend API temel URL'i
 // Gerekirse .env veya hardcode olarak değiştirin
 const client = axios.create({
-  baseURL: 'https://ceng316-project-production.up.railway.app',
+  baseURL: 'http://localhost:8000',
 });
 
 export default client;

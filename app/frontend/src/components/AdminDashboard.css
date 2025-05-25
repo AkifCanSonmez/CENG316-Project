@@ -1,58 +1,45 @@
 .admin-dashboard {
   padding: 2rem;
-  background-color: #f8f9fa;
-  min-height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.admin-dashboard h2 {
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
-  color: #2c3e50;
+  max-width: 800px;
+  margin: auto;
 }
 
 .admin-buttons {
   display: flex;
-  flex-wrap: wrap;
   gap: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
 }
 
 .admin-buttons button {
-  background-color: #007bff;
-  border: none;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.95rem;
+  background-color: #0056b3;
   color: white;
-  padding: 0.6rem 1.4rem;
-  border-radius: 4px;
-  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
 }
 
 .admin-buttons button:hover {
-  background-color: #0056b3;
+  background-color: #003f8a;
+}
+
+.card-box {
+  background: #f8f8f8;
+  border: 1px solid #dcdcdc;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.card-box h4 {
+  margin-bottom: 0.5rem;
+  color: #333;
 }
 
 .admin-status {
   font-weight: bold;
-  margin-bottom: 1rem;
-  color: #d35400;
-}
-
-.admin-dashboard h4 {
-  font-size: 1.2rem;
-  margin-top: 1.5rem;
-  margin-bottom: 0.75rem;
-  color: #34495e;
-}
-
-.admin-dashboard ul,
-.admin-dashboard ol {
-  padding-left: 1.25rem;
-  margin-bottom: 1rem;
-}
-
-.admin-dashboard li {
-  margin-bottom: 0.4rem;
-  color: #2d3436;
+  margin-bottom: 0.5rem;
+  color: #444;
 }

@@ -20,7 +20,7 @@ export default function GradApply() {
 
       const closed = userApps.find(a => a.is_closed);
       if (closed) {
-        setNotification(`🎓 Mezuniyet başvurunuz ${closed.status === 'approved' ? 'onaylandı' : 'reddedildi'}.`);
+        setNotification(`🎓 Mezuniyet başvurunuz ${closed.status === 'Onaylandı' ? 'onaylandı' : 'reddedildi'}.`);
       }
     } catch {
       setNotification('Başvurular yüklenemedi.');
@@ -35,9 +35,9 @@ export default function GradApply() {
   }, []);
 
   const handleCreate = async () => {
-    const alreadyApproved = applications.some(a => a.status === 'approved');
-    if (alreadyApproved) {
-      window.alert('Onaylı başvurunuz var. Yeniden başvuru yapamazsınız.');
+    const hasClosedApp = applications.some(a => a.is_closed);  // artık bitmiş başvuru varsa
+    if (hasClosedApp) {
+      window.alert('Sonuçlanmış başvurunuz var. Yeniden başvuru yapamazsınız.');
       return;
     }
 
@@ -51,6 +51,7 @@ export default function GradApply() {
       window.alert(err.response?.data?.detail || 'Başvuru sırasında hata oluştu.');
     }
   };
+
 
   if (loading) return <p>Yükleniyor...</p>;
 

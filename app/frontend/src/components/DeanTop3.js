@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../api/client';
+import './DeanTop3.css'; // 👈 bunu ekle
 
 export default function DeanTop3() {
   const [top3, setTop3] = useState(null);
@@ -11,11 +12,11 @@ export default function DeanTop3() {
       .catch(() => setError('⚠️ Mezuniyet listesi henüz oluşturulmadı.'));
   }, []);
 
-  if (error) return <p>{error}</p>;
-  if (!top3) return <p>Yükleniyor...</p>;
+  if (error) return <p className="dean-top3-error">{error}</p>;
+  if (!top3) return <p className="dean-top3-loading">Yükleniyor...</p>;
 
   return (
-    <div>
+    <div className="dean-top3-container">
       <h2>Top 3 Öğrenci (Dekan)</h2>
       <ol>
         {top3.map(r => (

@@ -25,7 +25,7 @@ export default function RequestExam() {
 
   const handleDecision = decision => {
     decideRequest(selectedReqId, decision)
-    setDecisionStatus(decision === 'approved' ? 'Onaylandı.' : 'Reddedildi.')
+    setDecisionStatus(decision === 'Onaylandı' ? 'Onaylandı.' : 'Reddedildi.')
   }
 
   const myRequests =
@@ -66,8 +66,8 @@ export default function RequestExam() {
               <strong>{r.course}</strong> — {r.date}
               <p>{r.details}</p>
               {r.decision && (
-                <p className={`req-status ${r.decision === 'approved' ? 'success' : 'error'}`}>
-                  Karar: {r.decision === 'approved' ? 'Onaylandı' : 'Reddedildi'}
+                <p className={`req-status ${r.decision === 'Onaylandı' ? 'success' : 'error'}`}>
+                  Karar: {r.decision === 'Onaylandı' ? 'Onaylandı' : 'Reddedildi'}
                 </p>
               )}
             </li>
@@ -82,14 +82,14 @@ export default function RequestExam() {
       <h2>Bekleyen Talepler</h2>
       <div className="decision-panel">
         <button
-          onClick={() => handleDecision('approved')}
+          onClick={() => handleDecision('Onaylandı')}
           disabled={!selectedReqId}
           className="primary-button"
         >
           Onayla
         </button>
         <button
-          onClick={() => handleDecision('rejected')}
+          onClick={() => handleDecision('Reddedildi')}
           disabled={!selectedReqId}
           className="danger-button"
         >

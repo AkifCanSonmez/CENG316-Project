@@ -26,8 +26,8 @@ export default function StudentDecided() {
           {decided.map(r => (
             <li key={r.id}>
               <strong>{r.course} Sınav</strong> — {r.date} —{' '}
-              <span className={r.decision === 'approved' ? 'approved' : 'rejected'}>
-                {r.decision === 'approved' ? 'Onaylandı' : 'Reddedildi'}
+              <span className={r.decision === 'Onaylandı' ? 'Onaylandı' : 'Reddedildi'}>
+                {r.decision === 'Onaylandı' ? 'Onaylandı' : 'Reddedildi'}
               </span>
             </li>
           ))}

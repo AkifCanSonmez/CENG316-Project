@@ -11,7 +11,7 @@ export default function DecideExamRequest() {
   const { getRequestById, decideRequest } = useRequests()
   const nav = useNavigate()
   const [req, setReq] = useState(null)
-  const [decision, setDecision] = useState('approved')
+  const [decision, setDecision] = useState('Onaylandı')
   const [feedback, setFeedback] = useState('')
 
   useEffect(() => {
@@ -49,8 +49,8 @@ export default function DecideExamRequest() {
             value={decision}
             onChange={e => setDecision(e.target.value)}
           >
-            <option value="approved">Onayla</option>
-            <option value="rejected">Reddet</option>
+            <option value="Onaylandı">Onayla</option>
+            <option value="Reddedildi">Reddet</option>
           </select>
         </label>
         <button type="submit" className="primary-button">
