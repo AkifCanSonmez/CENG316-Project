@@ -1,42 +1,52 @@
-// src/components/Register.js
-
 import React, { useState } from 'react';
 import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import './Register.css';
 
 export default function Register() {
-  // 1) Hooks at the very top, unconditionally
   const { user, register } = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('student');
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
 
-  // 2) Conditional redirect after hooks
   if (user) {
     return <Navigate to="/app" replace />;
   }
 
-  // 3) Form submit handler
   const handleSubmit = async e => {
     e.preventDefault();
     setError(null);
+    setSuccess(null);
+
     try {
       await register(email, password, role);
-      navigate('/login', { replace: true });
+      setSuccess('✅ Kayıt başarılı! Giriş ekranına yönlendiriliyorsunuz...');
+      setTimeout(() => {
+        navigate('/login', { replace: true });
+      }, 1500);
     } catch (err) {
-      setError(err.message);
+      const msg = err.message.toLowerCase();
+
+      if (msg.includes('403')) {
+        setError('⚠️ Bu e-posta ile kayıt olunamaz. Lütfen öğrenci işlerine başvurun.');
+      } else if (msg.includes('400')) {
+        setError('❌ Bu e-posta zaten sistemde kayıtlı. Lütfen giriş yapmayı deneyin.');
+      } else {
+        setError('⚠️ Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin.');
+      }
     }
   };
 
-  // 4) JSX
   return (
     <div className="register-container">
       <form className="register-form" onSubmit={handleSubmit}>
         <h2>Kayıt Ol</h2>
+
         {error && <p className="register-error">{error}</p>}
+        {success && <p className="register-success">{success}</p>}
 
         <label>
           E-posta

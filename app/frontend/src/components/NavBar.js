@@ -29,7 +29,7 @@ export default function NavBar() {
         {user.role === 'student' && (
           <>
             <Link to="/app/request-exam" className="sidebar-link">Ek Sınav Talebi</Link>
-            <Link to="/app/request-exam/decided" className="sidebar-link">Karar Verilmiş Taleplerim</Link>
+            <Link to="/app/request-exam/decided" className="sidebar-link">Karar Verilmiş Ek Sınav Taleplerim</Link>
             <Link to="/app/grad-apply" className="sidebar-link">Mezuniyet Başvurusu</Link>
           </>
         )}
@@ -37,8 +37,8 @@ export default function NavBar() {
         {user.role === 'academic' && (
           <>
             <Link to="/app/request-exam" className="sidebar-link">Bekleyen Ek Sınav Talepleri</Link>
-            <Link to="/app/request-exam/decided-admin" className="sidebar-link">Karar Verilmiş Talepler</Link>
-            <Link to="/app/advisor-decisions" className="sidebar-link">Advisor Kararları</Link>
+            <Link to="/app/request-exam/decided-admin" className="sidebar-link">Karar Verilmiş Ek Sınav Talepleri</Link>
+            <Link to="/app/advisor-decisions" className="sidebar-link">Danışman Kararları</Link>
           </>
         )}
 

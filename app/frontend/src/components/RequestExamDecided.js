@@ -14,7 +14,7 @@ export default function RequestExamDecided() {
 
   return (
     <div className="decided-container">
-      <h2>Karar Verilmiş Talepler</h2>
+      <h2>Karar Verilmiş Ek Sınav Talepleri</h2>
       {decided.length === 0 ? (
         <p>Henüz karar verilmiş talep yok.</p>
       ) : (

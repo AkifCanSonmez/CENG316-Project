@@ -75,7 +75,7 @@ export default function AdminDashboard() {
 
       {/* Top 3 Sonucu */}
       <div className="card-box">
-        <h4>Top 3 Öğrenci</h4>
+        <h4>En Yüksek Puanlı 3 Öğrenci</h4>
         {top3Status && <p className="admin-status">{top3Status}</p>}
         {top3.length > 0 && (
           <ol>{top3.map(t => <li key={t.student}>{t.student} — GPA: {t.gpa}</li>)}</ol>
