@@ -94,3 +94,13 @@
 .login-switch a:hover {
   text-decoration: underline;
 }
+
+.login-error {
+  color: #b91c1c;
+  background-color: #fee2e2;
+  padding: 0.5rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: 500;
+}

@@ -11,7 +11,8 @@ export default function AdvisorDecision() {
 
   useEffect(() => {
     fetchApps();
-  }, [fetchApps]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const pendings = apps.filter(a => a.status === 'Devam Ediyor');
 
@@ -20,27 +21,26 @@ export default function AdvisorDecision() {
       const newData = {};
       const newFetched = [];
 
-      for (const app of pendings) {
-        if (!fetchedIds.includes(app.id)) {
-          try {
-            const res = await axios.get(`/students/${app.student_id}/eligibility`);
-            newData[app.id] = res.data;
-            newFetched.push(app.id);
-          } catch {
-            newData[app.id] = null;
-            newFetched.push(app.id);
-          }
+      const newPendings = pendings.filter(app => !fetchedIds.includes(app.id));
+      if (newPendings.length === 0) return;
+
+      for (const app of newPendings) {
+        try {
+          const res = await axios.get(`/students/${app.student_id}/eligibility`);
+          newData[app.id] = res.data;
+          newFetched.push(app.id);
+        } catch {
+          newData[app.id] = null;
+          newFetched.push(app.id);
         }
       }
 
-      if (Object.keys(newData).length > 0) {
-        setEligData(prev => ({ ...prev, ...newData }));
-        setFetchedIds(prev => [...prev, ...newFetched]);
-      }
+      setEligData(prev => ({ ...prev, ...newData }));
+      setFetchedIds(prev => [...prev, ...newFetched]);
     };
 
-    if (pendings.length > 0) fetchEligibility();
-  }, [pendings, fetchedIds]);
+    fetchEligibility();
+  }, [apps]);
 
   const handleDecision = async (appId, decision) => {
     try {
@@ -66,27 +66,41 @@ export default function AdvisorDecision() {
       <table className="advisor-table">
         <thead>
           <tr>
-            <th>#ID</th>
+            <th>Öğrenci No</th>
             <th>GPA</th>
             <th>Zorunlu</th>
             <th>Teknik</th>
-            <th>Non-Tech</th>
+            <th>Teknik Olmayan</th>
             <th>İşlem</th>
           </tr>
         </thead>
         <tbody>
           {pendings.map(app => {
             const e = eligData[app.id];
+            const studentNo = app.student?.student_id || '---';
+            const isEligible = e && e.gpa >= 2.0 && e.required_passed && e.technical >= 1 && e.nontechnical >= 1;
+
             return (
               <tr key={app.id}>
-                <td>{app.id}</td>
-                <td>{e ? e.gpa : '...'}</td>
-                <td>{e ? (e.required_passed ? '✓' : '✗') : '...'}</td>
-                <td>{e ? e.technical : '...'}</td>
-                <td>{e ? e.nontechnical : '...'}</td>
+                <td>{studentNo}</td>
+                <td>{e ? e.gpa : e === null ? '❌' : '...'}</td>
+                <td>{e ? (e.required_passed ? '✓' : '✗') : e === null ? '❌' : '...'}</td>
+                <td>{e ? e.technical : e === null ? '❌' : '...'}</td>
+                <td>{e ? e.nontechnical : e === null ? '❌' : '...'}</td>
                 <td>
-                  <button onClick={() => handleDecision(app.id, 'Onaylandı')} className="btn-approve">Onayla</button>
-                  <button onClick={() => handleDecision(app.id, 'Reddedildi')} className="btn-reject">Reddet</button>
+                  <button
+                    onClick={() => handleDecision(app.id, 'Onaylandı')}
+                    className={`btn-approve${!isEligible ? ' disabled' : ''}`}
+                    disabled={!isEligible}
+                  >
+                    Onayla
+                  </button>
+                  <button
+                    onClick={() => handleDecision(app.id, 'Reddedildi')}
+                    className="btn-reject"
+                  >
+                    Reddet
+                  </button>
                 </td>
               </tr>
             );

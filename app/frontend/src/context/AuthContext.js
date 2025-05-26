@@ -1,4 +1,3 @@
-// src/context/AuthContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from '../api/client'; // 👈 client.js'teki axios örneği
 
@@ -12,21 +11,37 @@ export function AuthProvider({ children }) {
   });
 
   const login = async (email, password) => {
-    const res = await axios.post('/login', { email, password });
-    const data = res.data;
-    const me = {
-      id: data.id,
-      email: data.email,
-      role: data.role,
-      name: data.email.split('@')[0],
-    };
-    setUser(me);
-    return data;
+    try {
+      const res = await axios.post('/login', { email, password });
+      const data = res.data;
+      const me = {
+        id: data.id,
+        email: data.email,
+        role: data.role,
+        name: data.email.split('@')[0],
+      };
+      setUser(me);
+      return data;
+    } catch (err) {
+      const msg = err.response?.data?.detail || 'Giriş başarısız';
+      const status = err.response?.status;
+      const error = new Error(msg);
+      error.message = `${status} - ${msg}`;
+      throw error;
+    }
   };
 
   const register = async (email, password, role) => {
-    const res = await axios.post('/register', { email, password, role });
-    return res.data;
+    try {
+      const res = await axios.post('/register', { email, password, role });
+      return res.data;
+    } catch (err) {
+      const msg = err.response?.data?.detail || 'Kayıt başarısız';
+      const status = err.response?.status;
+      const error = new Error(msg);
+      error.message = `${status} - ${msg}`;
+      throw error;
+    }
   };
 
   const logout = () => {

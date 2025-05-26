@@ -5,12 +5,22 @@ from database import Base
 
 class User(Base):
     __tablename__ = "users"
-    id       = Column(Integer, primary_key=True, index=True)
-    email    = Column(String(255), unique=True, index=True, nullable=False)
-    password = Column(String(255), nullable=False)
-    role     = Column(String(50), nullable=False)
+    id         = Column(Integer, primary_key=True, index=True)
+    email      = Column(String(255), unique=True, index=True, nullable=False)
+    password   = Column(String(255), nullable=False)
+    role       = Column(String(50), nullable=False)
+    student_id = Column(String(20), unique=True, nullable=True)  # sadece öğrenci için dolu olacak
     applications = relationship("GraduationApplication", back_populates="student")
     transcripts  = relationship("TranscriptEntry", back_populates="student")
+    
+class RegisterableUser(Base):
+    __tablename__ = "registerable_users"
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String, unique=True, index=True, nullable=False)
+    role = Column(String, nullable=False)
+    registerable = Column(Boolean, default=True)
+    student_id = Column(String, unique=True, nullable=True)  # öğrenci kimliği, sadece öğrenci için
+
 
 class GraduationApplication(Base):
     __tablename__ = "graduation_applications"

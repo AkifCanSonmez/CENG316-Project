@@ -1,36 +1,37 @@
-// src/components/Login.js
-
 import React, { useState } from 'react';
 import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import './Login.css';
 
 export default function Login() {
-  // 1) Hooks at the very top
   const { user, login } = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
 
-  // 2) Conditional redirect after hooks
   if (user) {
     return <Navigate to="/app" replace />;
   }
 
-  // 3) Form submit handler
   const handleSubmit = async e => {
     e.preventDefault();
     setError(null);
+
     try {
       await login(email, password);
       navigate('/app', { replace: true });
     } catch (err) {
-      setError(err.message);
+      const msg = err.message?.toLowerCase();
+
+      if (msg.includes('401')) {
+        setError('❌ E-posta veya şifre hatalı. Lütfen tekrar deneyin.');
+      } else {
+        setError('⚠️ Giriş yapılamadı. Lütfen daha sonra tekrar deneyin.');
+      }
     }
   };
 
-  // 4) JSX
   return (
     <div
       className="login-container"

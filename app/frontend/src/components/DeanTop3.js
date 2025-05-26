@@ -1,6 +1,8 @@
+// src/components/DeanTop3.js
+
 import React, { useEffect, useState } from 'react';
 import axios from '../api/client';
-import './DeanTop3.css'; // 👈 bunu ekle
+import './DeanTop3.css';
 
 export default function DeanTop3() {
   const [top3, setTop3] = useState(null);
@@ -17,11 +19,20 @@ export default function DeanTop3() {
 
   return (
     <div className="dean-top3-container">
-      <h2>Top 3 Öğrenci (Dekan)</h2>
+      <h2>En Yüksek Puanlı 3 Mezun Öğrenci</h2>
       <ol>
-        {top3.map(r => (
-          <li key={r.student}>{r.student} — GPA: {r.gpa}</li>
-        ))}
+        {top3.map((r, i) => {
+          const gpa = parseFloat(r.gpa);
+          let honor = '';
+          if (gpa >= 3.7) honor = ' 🎓 Yüksek Onur';
+          else if (gpa >= 3.0) honor = ' 🏅 Onur';
+
+          return (
+            <li key={r.student}>
+              {i + 1}. {r.student} — AGNO: {gpa}{honor}
+            </li>
+          );
+        })}
       </ol>
     </div>
   );

@@ -70,3 +70,9 @@
 .btn-reject:hover {
   background-color: #c82333;
 }
+.btn-approve:disabled,
+.btn-approve.disabled {
+  background-color: #a5d6a7;
+  cursor: not-allowed;
+  opacity: 0.6;
+}

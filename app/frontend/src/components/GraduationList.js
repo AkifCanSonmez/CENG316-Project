@@ -1,3 +1,5 @@
+// src/components/GraduationList.js
+
 import React, { useEffect, useState } from 'react';
 import axios from '../api/client';
 import { useAuth } from '../context/AuthContext';
@@ -10,32 +12,35 @@ export default function GraduationList() {
   useEffect(() => {
     if (!user) return;
 
-    console.log('🧠 user:', user);
     axios.get('/graduation-list', {
       headers: { 'x-user-email': user.email }
     })
-      .then(res => {
-        console.log('✅ response:', res.data);
-        setList(res.data);
-      })
+      .then(res => setList(res.data))
       .catch(err => {
-        console.error('❌ graduation list error:', err.response?.data || err.message);
+        console.error('❌ Mezuniyet listesi hatası:', err.response?.data || err.message);
         setList([]);
       });
   }, [user]);
 
   return (
     <div className="graduation-container">
-      <h2>Graduation List (Dean Only)</h2>
+      <h2>Mezuniyet Listesi (Sadece Dekan)</h2>
       {list.length === 0 ? (
-        <p className="no-applications">No approved applications yet.</p>
+        <p className="no-applications">Henüz onaylanmış mezuniyet başvurusu yok.</p>
       ) : (
         <ol className="graduation-list">
-          {list.map((entry, i) => (
-            <li key={i}>
-              <strong>{entry.student}</strong> — GPA: <span className="gpa">{entry.gpa}</span>
-            </li>
-          ))}
+          {list.map((entry, i) => {
+            const gpa = parseFloat(entry.gpa);
+            let honor = '';
+            if (gpa >= 3.7) honor = ' 🎓 Yüksek Onur';
+            else if (gpa >= 3.0) honor = ' 🏅 Onur';
+
+            return (
+              <li key={i}>
+                <strong>{entry.student}</strong> — AGNO: <span className="gpa">{gpa}</span>{honor}
+              </li>
+            );
+          })}
         </ol>
       )}
     </div>

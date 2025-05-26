@@ -18,7 +18,7 @@ export default function StudentDecided() {
 
   return (
     <div className="decided-container">
-      <h2>Karar Verilmiş Taleplerim</h2>
+      <h2>Karar Verilmiş Ek Sınav Taleplerim</h2>
       {decided.length === 0 ? (
         <p>Henüz karar verilmiş talebiniz yok.</p>
       ) : (

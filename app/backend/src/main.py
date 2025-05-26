@@ -4,10 +4,12 @@ from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from typing import List
 from datetime import datetime
+from models import RegisterableUser
+from sqlalchemy.orm import joinedload
 
 from database import SessionLocal, engine, Base
 from models import User, Course, TranscriptEntry, GraduationApplication, CertificateAssignment
-from seed_allowed import seed_all
+from seed_allowed import Seeder
 
 app = FastAPI()
 
@@ -46,6 +48,12 @@ class ApplicationCreate(BaseModel):
     student_id: int
     initiated_by: str
 
+class StudentInfo(BaseModel):
+    student_id: str
+
+    class Config:
+        orm_mode = True
+
 class ApplicationRead(BaseModel):
     id: int
     student_id: int
@@ -53,6 +61,7 @@ class ApplicationRead(BaseModel):
     status: str
     is_closed: bool
     created_at: datetime
+    student: StudentInfo  # 👈 ilişkili öğrenci nesnesi
 
     class Config:
         orm_mode = True
@@ -68,25 +77,56 @@ class ResetResponse(BaseModel):
     msg: str
 
 # -------------------- SEED --------------------
-
 @app.on_event("startup")
 def seed():
-    seed_all()
+    Base.metadata.drop_all(bind=engine)  # opsiyonel: veritabanını sıfırlamak için
+    Base.metadata.create_all(bind=engine)
+    db = SessionLocal()
+    Seeder(db).run_all()
+    db.close()
 
 @app.get("/reset-db", response_model=ResetResponse)
 def reset_database():
-    seed_all()
+    Base.metadata.drop_all(bind=engine)  # opsiyonel: veritabanını sıfırlamak için
+    Base.metadata.create_all(bind=engine)
+    db = SessionLocal()
+    Seeder(db).run_all()
+    db.close()
     return {"msg": "Veritabanı sıfırlandı ve seed işlemi tamamlandı."}
 
 # -------------------- AUTH --------------------
 
 @app.post("/register", response_model=AuthResponse)
 def register(data: RegisterRequest, db: Session = Depends(get_db)):
-    u = User(email=data.email, password=data.password, role=data.role)
+    # 1. Erişim kontrolü
+    allowed = db.query(RegisterableUser).filter_by(
+        email=data.email, role=data.role, registerable=True
+    ).first()
+    if not allowed:
+        raise HTTPException(status_code=403, detail="Bu e-posta ile kayıt olunamaz.")
+    
+    # 2. Mevcut kullanıcı kontrolü
+    existing = db.query(User).filter_by(email=data.email).first()
+    if existing:
+        raise HTTPException(status_code=400, detail="Bu e-posta zaten kayıtlı.")
+    
+    # 3. Yeni kullanıcı oluştur
+    u = User(
+        email=data.email,
+        password=data.password,
+        role=data.role,
+        student_id=allowed.student_id
+    )
     db.add(u)
     db.commit()
     db.refresh(u)
+
+    # 4. Eğer öğrenci ise otomatik transkript oluştur
+    if u.role == "student":
+        Seeder(db).seed_transcripts_for_student(u)
+
     return AuthResponse(id=u.id, email=u.email, role=u.role)
+
 
 @app.post("/login", response_model=AuthResponse)
 def login(data: AuthRequest, db: Session = Depends(get_db)):
@@ -121,9 +161,11 @@ def create_application(data: ApplicationCreate, db: Session = Depends(get_db)):
     db.refresh(app)
     return app.id
 
+
 @app.get("/applications/", response_model=List[ApplicationRead])
 def list_all_applications(db: Session = Depends(get_db)):
-    return db.query(GraduationApplication).all()
+    return db.query(GraduationApplication).options(joinedload(GraduationApplication.student)).all()
+
 
 @app.post("/applications/initiate-bulk")
 def bulk_applications(db: Session = Depends(get_db)):
@@ -161,6 +203,9 @@ def check_eligibility(sid: int, db: Session = Depends(get_db)):
         raise HTTPException(404, "Öğrenci bulunamadı")
 
     entries = student.transcripts
+    if not entries:
+        raise HTTPException(400, "Öğrencinin transkripti bulunamadı")
+
     gpa = sum(e.grade for e in entries) / len(entries)
     required = [e for e in entries if e.course.required]
     passed_required = all(e.grade >= 2.0 for e in required)
@@ -175,6 +220,7 @@ def check_eligibility(sid: int, db: Session = Depends(get_db)):
         "technical": tech,
         "nontechnical": nontech
     }
+
 
 @app.post("/applications/generate-list")
 def generate_list_endpoint(db: Session = Depends(get_db)):
